@@ -2,7 +2,7 @@
 n = int(input()) # 도시의 개수
 roads = list(map(int, input().split())) # 두 도시를 연결하는 각 도로의 길이
 prices = list(map(int, input().split())) # 각 도시의 리터당 가격
-roads.append(1000000001)
+roads.append(0)
 
 pay = 0 # 기름값
 
