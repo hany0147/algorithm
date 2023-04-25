@@ -1,16 +1,18 @@
 n = int(input())
 k = int(input())
-start, end = 1, k
-while start <= end:
-    mid = (start + end) // 2
-    cnt = 0
 
-    for i in range(1, n + 1):
-        cnt += min(mid // i, n)
-    
-    if cnt >= k:
-        res = mid
-        end = mid - 1
-    else:
-        start = mid + 1
-print(res)
+def bs(target, start, end):
+    while start <= end:
+        mid = (start + end) // 2
+        cnt = 0
+
+        for i in range(1, n + 1):
+            cnt += min(mid // i, n)
+        
+        if cnt >= target:
+            end = mid - 1
+        else:
+            start = mid + 1
+    return start
+
+print(bs(k, 1, n * n))
