@@ -1,59 +1,53 @@
 n = int(input())
+hint = [list(map(int, input().split())) for _ in range(n)]
+ans = 0
 
-numbers = [list(map(str,input().split())) for _ in range(n)]
-# string을 미리 넣어준 이유는, 나중에 쪼개기 위해서
+for a in range(1, 10):
+    for b in range(1, 10):
+        for c in range(1, 10):
 
-answer = 0
-
-# (1) 세 자리 숫자 만들기
-for a in range(1,10): # 100의 자리수
-    for b in range(1,10): # 10의 자리수
-        for c in range(1,10): # 1의 자리수
-            counter = 0
-            
-            # (2) 다른 세 자리수
-            if( a == b or b == c or c == a):
+            # 숫자가 같으면 안됨
+            if a == b or b == c or c == a:
                 continue
-            
-            # continue, 그 숫자를 넘김
-            # break, 반복문을 넘김
 
-            # (3) 배열에 넣은 조건을 넣어주기
-            for array in numbers:
-                check = list(array[0]) # ['1','2','3']
-                strike = int(array[1])
-                ball = int(array[2])
+            cnt = 0
 
-                strike_count = 0
-                ball_count = 0
+            for arr in hint:
+                number = arr[0]
+                strike = arr[1]
+                ball = arr[2]
 
-                #스트라이크 계산기
-                if (a == int(check[0])):
-                    strike_count += 1
-                if (b == int(check[1])):
-                    strike_count += 1
-                if (c == int(check[2])):
-                    strike_count += 1
+                strike_cnt = 0
+                ball_cnt = 0
+
+                first = number // 100
+                second = (number % 100) // 10
+                third = (number % 10)
+
+                # print(f'first: {first}, second: {second}, third: {third}')
+
+                if a == first:
+                    strike_cnt += 1
+                if b == second:
+                    strike_cnt += 1
+                if c == third:
+                    strike_cnt += 1
                 
+                if a == second or a == third:
+                    ball_cnt += 1
+                if b == first or b == third:
+                    ball_cnt += 1
+                if c == first or c == second:
+                    ball_cnt += 1
 
-                #볼 계산기
-                if (a == int(check[1]) or a == int(check[2])):
-                    ball_count += 1
-                if (b == int(check[0]) or b == int(check[2])):
-                    ball_count += 1
-                if (c == int(check[0]) or c == int(check[1])):
-                    ball_count += 1
-                
-                
-                #(4) 매칭 여부 확인하기
-                if (strike != strike_count):
+                if strike_cnt != strike:
                     break
-                if (ball != ball_count):
+                if ball_cnt != ball:
                     break
-                
-                counter += 1
 
-            if counter == n:
-                answer += 1
-                
-print(answer)
+                cnt += 1
+
+            if cnt == n:
+                ans += 1
+
+print(ans)
