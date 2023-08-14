@@ -1,3 +1,4 @@
+
 def cook(idx, p, f, s, v, c):
     global ans
     global arr
@@ -5,7 +6,7 @@ def cook(idx, p, f, s, v, c):
     # 우선 최소 영양소를 충족하고,
     if p >= mp and f >= mf and s >= ms and v >= mv:
         if ans > c:
-            ans = min(ans, c)
+            ans = c
             ans_arr = []
             for i in arr:
                 ans_arr.append(i)
