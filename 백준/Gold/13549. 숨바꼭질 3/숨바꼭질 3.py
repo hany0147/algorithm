@@ -1,25 +1,26 @@
-import sys
+
 from collections import deque
 
-input = sys.stdin.readline
-
-N, K = map(int, input().split())
+n, k = map(int, input().split())
+MAX = 100_000
+dist = [-1] * (MAX + 1)
 q = deque()
-q.append(N)
-visited = [-1 for _ in range(100001)]
-visited[N]=0
-
+q.append(n)
+dist[n] = 0
 while q:
-    s=q.popleft()
-    if s == K:
-        print(visited[s])
+    x = q.popleft()
+
+    if x == k:
+        print(dist[k])
         break
-    if 0 <= s-1 < 100001 and visited[s-1]==-1:
-        visited[s-1]=visited[s]+1
-        q.append(s-1)
-    if 0 <= s*2 < 100001 and visited[s*2]==-1:
-        visited[s*2]=visited[s]
-        q.appendleft(s*2)
-    if 0 <= s+1 < 100001 and visited[s+1]==-1:
-        visited[s+1]=visited[s]+1
-        q.append(s+1)
+
+    if 0 <= x - 1 <= MAX and dist[x - 1] == -1:
+        dist[x - 1] = dist[x] + 1
+        q.append(x - 1)
+
+    if 0 <= x * 2 <= MAX and dist[x * 2] == -1:
+        dist[x * 2] = dist[x]
+        q.appendleft(x * 2)
+    if 0 <= x + 1 <= MAX and dist[x + 1] == -1:
+        dist[x + 1] = dist[x] + 1
+        q.append(x + 1)
