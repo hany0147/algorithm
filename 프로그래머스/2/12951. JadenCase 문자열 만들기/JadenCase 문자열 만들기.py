@@ -1,7 +1,7 @@
 def solution(s):
     answer = ''
     flag = True
-    for idx, item in enumerate(s):
+    for item in s:
         if item == ' ':
             flag = True
             answer += item
