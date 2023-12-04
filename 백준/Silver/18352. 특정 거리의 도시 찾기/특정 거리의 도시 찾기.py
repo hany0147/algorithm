@@ -1,13 +1,13 @@
+from collections import defaultdict, deque
 import sys
-from collections import deque
+input= sys.stdin.readline
 
-input = sys.stdin.readline
+dict_ = defaultdict(list)
 
 n, m, k, x = map(int, input().split())
-lst = [[] for _ in range(n + 1)]
 for _ in range(m):
     a, b = map(int, input().split())
-    lst[a].append(b)
+    dict_[a].append(b)
 
 q = deque()
 q.append([x, 0])
@@ -21,12 +21,12 @@ while q:
     if dist == k:
         result.append(node)
         flag = True
-
-    for nxt_node in lst[node]:
+        continue
+    for nxt_node in dict_[node]:
         if not visited[nxt_node]:
             visited[nxt_node] = 1
-            q.append([nxt_node, dist + 1])
-
+            alt = dist + 1
+            q.append([nxt_node, alt])
 result.sort()
 if not flag:
     print(-1)
